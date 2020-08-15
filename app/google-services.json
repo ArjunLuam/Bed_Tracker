@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "125496238342-tjt2hffeot5d0vu63r3rcaqs49ee7cim.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bedtracker",
+            "certificate_hash": "532f86fc421ba1776a910d8c731d178ad78b2fdc"
+          }
+        },
+        {
           "client_id": "125496238342-t9jdshh293g6ehbs4jk66l3v8j8qca24.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
