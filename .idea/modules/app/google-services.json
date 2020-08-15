@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "125496238342",
+    "firebase_url": "https://bedtracker-b0b21.firebaseio.com",
+    "project_id": "bedtracker-b0b21",
+    "storage_bucket": "bedtracker-b0b21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125496238342:android:189c8bcb4c44bebd1f3e87",
+        "android_client_info": {
+          "package_name": "com.example.bedtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125496238342-t9jdshh293g6ehbs4jk66l3v8j8qca24.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bedtracker",
+            "certificate_hash": "92e5505236d0299edcc792401b11f053a694a11a"
+          }
+        },
+        {
+          "client_id": "125496238342-q7me6ovr9ganotrr3841v1vpsiqiurjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAIOofJcUd6nHNsR2zlDQlY1li2PrNwlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125496238342-q7me6ovr9ganotrr3841v1vpsiqiurjg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
