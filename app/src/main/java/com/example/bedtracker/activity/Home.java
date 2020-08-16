@@ -22,6 +22,6 @@ public class Home extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.statusbar));
         }
 
-        //TODO : Umang will maintain the recycler view here
+        //TODO : Will maintain the recycler view here
     }
 }
