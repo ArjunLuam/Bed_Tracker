@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.bedtracker.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class HospitalLogin extends AppCompatActivity {
     private TextInputLayout mail,pass;
+    private MaterialButton btnLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,17 +33,29 @@ public class HospitalLogin extends AppCompatActivity {
 
         mail = findViewById(R.id.mail_lay);
         pass = findViewById(R.id.pass_lay);
-        String email = mail.getEditText().getText().toString();
-        String password = pass.getEditText().getText().toString();
+        btnLogin=findViewById(R.id.btnLogin);
 
-        if(TextUtils.isEmpty(mail.getEditText().getText()) || TextUtils.isEmpty(pass.getEditText().getText())){
-            Toast.makeText(HospitalLogin.this,"Enter the auth",Toast.LENGTH_LONG).show();
-        }
-        else if(!(email.equals("abc@gmail.com")) || !(password.equals("123"))){
-            Toast.makeText(HospitalLogin.this,"Enter the correct auth",Toast.LENGTH_LONG).show();
-        }
-        else{
-            startActivity(new Intent(HospitalLogin.this,HospitalRegistration.class));
-        }
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String email = mail.getEditText().getText().toString();
+                String password = pass.getEditText().getText().toString();
+
+                if(TextUtils.isEmpty(mail.getEditText().getText()) || TextUtils.isEmpty(pass.getEditText().getText())){
+                    Toast.makeText(HospitalLogin.this,"Enter the auth",Toast.LENGTH_LONG).show();
+                }
+                else if(!(email.equals("abc@gmail.com")) || !(password.equals("123"))){
+                    Toast.makeText(HospitalLogin.this,"Enter the correct auth",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    startActivity(new Intent(HospitalLogin.this,HospitalRegistration.class));
+                }
+
+            }
+        });
+
+
     }
 }

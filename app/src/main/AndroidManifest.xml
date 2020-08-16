@@ -15,9 +15,9 @@
         <activity android:name=".activity.BedDetails" />
         <activity android:name=".activity.HospitalRegistration" />
         <activity android:name=".activity.HospitalLogin" />
-        <activity android:name=".activity.Welcome" />
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.Home" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
