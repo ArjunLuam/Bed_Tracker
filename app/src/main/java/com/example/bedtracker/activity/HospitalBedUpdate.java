@@ -64,7 +64,7 @@ public class HospitalBedUpdate extends AppCompatActivity {
 
     public void UpdateData(String totalBeds,String availableBeds,DatabaseReference databaseRef){
 
-        mDatabaseRef.child("Users").child(uid).child("Total Number of beds").setValue(totalBeds.toString())
+        mDatabaseRef.child("Users").child(uid).child("Total Number of beds").setValue("Total NUmber of Beds : "+totalBeds)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -79,7 +79,7 @@ public class HospitalBedUpdate extends AppCompatActivity {
         });
 
 
-        mDatabaseRef.child("Users").child(uid).child("Number of beds available").setValue(availableBeds)
+        mDatabaseRef.child("Users").child(uid).child("Number of beds available").setValue("Number of Beds Available : "+availableBeds)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

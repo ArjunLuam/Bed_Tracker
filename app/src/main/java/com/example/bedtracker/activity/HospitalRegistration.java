@@ -35,6 +35,9 @@ public class HospitalRegistration extends AppCompatActivity {
         mPassword = findViewById(R.id.et_pass_emplee);
         mSubmit = findViewById(R.id.hos_submit);
 
+        String txt_hospital_id_fromLogin = getIntent().getExtras().getString("Email","defaultKey");
+        mHospitalId.setText(txt_hospital_id_fromLogin);
+
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +64,6 @@ public class HospitalRegistration extends AppCompatActivity {
         mIntent.putExtra("Hospital Name",hospitalName);
         mIntent.putExtra("Email",email);
         mIntent.putExtra("Password",password);
-        finish();
         startActivity(mIntent);
 
     }

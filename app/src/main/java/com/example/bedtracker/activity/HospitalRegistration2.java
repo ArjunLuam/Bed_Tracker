@@ -91,6 +91,7 @@ public class HospitalRegistration2 extends AppCompatActivity {
 
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("Hospital UID", userid);
+                            hashMap.put("Hospital ID", email);
                             hashMap.put("Hospital Name", hospitalName);
                             hashMap.put("Total Number of beds", "0");
                             hashMap.put("Number of beds available", "0");
