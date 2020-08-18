@@ -91,7 +91,7 @@ public class HospitalRegistration extends AppCompatActivity {
 
                                         Toast.makeText(HospitalRegistration.this, "Registration successful", Toast.LENGTH_SHORT).show();
 
-                                        Intent intent = new Intent(HospitalRegistration.this, BedInfo.class);
+                                        Intent intent = new Intent(HospitalRegistration.this, HospitalBedUpdate.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.HospitalRegistration">
+    tools:context=".activity.HospitalRegistration2">
+
 
     <TextView
         android:id="@+id/tv_register"
@@ -47,7 +48,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:hint="Hospital Name"
+                android:hint="Employee Name"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
@@ -76,7 +77,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                android:hint="Hospital ID"
+                android:hint="Employee ID"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
@@ -103,7 +104,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="24dp"
-                android:hint="Set up new Password"
+                android:hint="Employee Phone Number"
                 app:boxCornerRadiusBottomEnd="24dp"
                 app:boxCornerRadiusBottomStart="24dp"
                 app:boxCornerRadiusTopEnd="24dp"
@@ -124,8 +125,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
@@ -136,7 +135,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:fontFamily="@font/poppinssemibold"
-        android:text="Next Page"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="270:50"
         app:layout_constraintEnd_toEndOf="parent"
