@@ -46,8 +46,6 @@ public class Phone extends Fragment {
             }
         });
 
-
-
         return view;
     }
 }

@@ -3,6 +3,7 @@ package com.example.bedtracker.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -71,7 +72,8 @@ public class HospitalLogin extends AppCompatActivity {
                     startActivity(mIntent);
 
                 }else{
-                    userRegistrationCheck(email,password);
+
+                   userRegistrationCheck(email,password);
 
                 }
 
@@ -82,17 +84,24 @@ public class HospitalLogin extends AppCompatActivity {
 
     private void SignIn(String Email,String Password){
 
+        final ProgressDialog pd = new ProgressDialog(HospitalLogin.this);
+        pd.setMessage("Signing In");
+        pd.show();
+        pd.setCancelable(false);
 
         mAuth.signInWithEmailAndPassword(Email,Password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Intent intent = new Intent(HospitalLogin.this, MainActivity.class);
+
+                            pd.dismiss();
+                            Intent intent = new Intent(HospitalLogin.this, HospitalBedUpdate.class);
                             startActivity(intent);
                             finish();
                         } else {
 
+                            pd.dismiss();
                             Toast.makeText(HospitalLogin.this, "Authentication failed!", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -103,6 +112,11 @@ public class HospitalLogin extends AppCompatActivity {
 
     public void userRegistrationCheck(String Email,String Password){
 
+        final ProgressDialog pd = new ProgressDialog(HospitalLogin.this);
+        pd.setMessage("Checking Details");
+        pd.show();
+        pd.setCancelable(false);
+
 
         DatabaseReference UserReference = FirebaseDatabase.getInstance().getReference("Users");
         UserReference.orderByChild("Hospital ID").equalTo(Email).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -112,14 +126,14 @@ public class HospitalLogin extends AppCompatActivity {
 
                 if (dataSnapshot.getValue() != null){
 
+                    pd.dismiss();
                     SignIn(Email,Password);
-                    Intent mIntent = new Intent(HospitalLogin.this,HospitalBedUpdate.class);
-                    finish();
-                    startActivity(mIntent);
+
 
 
                 }else{
 
+                    pd.dismiss();
                     Intent mIntent = new Intent(HospitalLogin.this,HospitalRegistration.class);
                     mIntent.putExtra("Email",Email);
                     finish();
@@ -130,6 +144,9 @@ public class HospitalLogin extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                pd.dismiss();
+                Toast.makeText(HospitalLogin.this, "Error in connecting to database.Please restart and try again!", Toast.LENGTH_SHORT).show();
 
             }
         });
