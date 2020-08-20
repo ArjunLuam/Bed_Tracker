@@ -51,6 +51,7 @@ public class HospitalLogin extends AppCompatActivity {
         pass = findViewById(R.id.pass_lay);
         btnLogin=findViewById(R.id.btnLogin);
 
+        mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +113,10 @@ public class HospitalLogin extends AppCompatActivity {
                 if (dataSnapshot.getValue() != null){
 
                     SignIn(Email,Password);
+                    Intent mIntent = new Intent(HospitalLogin.this,HospitalBedUpdate.class);
+                    finish();
+                    startActivity(mIntent);
+
 
                 }else{
 

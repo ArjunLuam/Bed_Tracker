@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class HospitalBedUpdate extends AppCompatActivity {
 
     TextInputEditText mTotalBeds, mAvailableBeds;
@@ -49,6 +52,17 @@ public class HospitalBedUpdate extends AppCompatActivity {
         uid=auth.getCurrentUser().getUid();
 
 
+        Calendar c = Calendar.getInstance();
+
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = df.format(c.getTime());
+
+        // formattedDate have current date/time
+        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
+
+
+
         mUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,15 +70,15 @@ public class HospitalBedUpdate extends AppCompatActivity {
                 txtTotalBeds = mTotalBeds.getText().toString();
                 txtAvailableBeds = mAvailableBeds.getText().toString();
 
-                UpdateData(txtTotalBeds,txtAvailableBeds,mDatabaseRef);
+                UpdateData(txtTotalBeds,txtAvailableBeds,mDatabaseRef,formattedDate);
             }
         });
 
     }
 
-    public void UpdateData(String totalBeds,String availableBeds,DatabaseReference databaseRef){
+    public void UpdateData(String totalBeds,String availableBeds,DatabaseReference databaseRef,String DateTime){
 
-        mDatabaseRef.child("Users").child(uid).child("Total Number of beds").setValue("Total NUmber of Beds : "+totalBeds)
+        mDatabaseRef.child("Users").child(uid).child("Total Number of beds").setValue("Total Number of Beds : "+totalBeds)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -84,6 +98,19 @@ public class HospitalBedUpdate extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(HospitalBedUpdate.this,"Available Beds updated",Toast.LENGTH_SHORT);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(HospitalBedUpdate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mDatabaseRef.child("Users").child(uid).child("Data-Time").setValue("Updated on : "+DateTime)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(HospitalBedUpdate.this,"Date Time updated",Toast.LENGTH_SHORT);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
