@@ -109,7 +109,6 @@ public class HospitalBedUpdate extends AppCompatActivity {
                         mTotalBeds.setText("");
                         mAvailableBeds.setText("");
 
-
                     }
 
                     @Override
