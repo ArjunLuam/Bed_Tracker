@@ -30,9 +30,8 @@ import com.bumptech.glide.Glide;
 import com.example.bedtracker.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
@@ -48,7 +47,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -74,6 +72,8 @@ public class HospitalRegistration2 extends AppCompatActivity {
     final int REQUEST_CODE_FINE_LOCATION = 12;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int UNIQUE_REQUEST_CODE = 1;
+
+    Uri downloadUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -327,7 +327,56 @@ public class HospitalRegistration2 extends AppCompatActivity {
 
         storageReference = storageReference.child("images/" + UUID.randomUUID().toString());
 
-        if (FilePathUri != null)
+        storageReference.putFile(FilePathUri)
+                .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(HospitalRegistration2.this, "image uploaded", Toast.LENGTH_SHORT).show();
+
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    downloadUri=uri;
+
+                                    reference.child("ID CARD URL").setValue(downloadUri.toString())
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                    if(task.isSuccessful())
+                                                    {
+                                                        Toast.makeText(HospitalRegistration2.this, "image saved on database", Toast.LENGTH_SHORT).show();
+                                                        pd.dismiss();
+                                                    }
+
+                                                    else
+                                                    {
+                                                        String error=task.getException().toString();
+                                                        Toast.makeText(HospitalRegistration2.this, "Error: "+task, Toast.LENGTH_SHORT).show();
+                                                        pd.dismiss();
+                                                    }
+
+                                                }
+                                            });
+
+                                }
+                            });
+                        }
+
+                        else
+                        {
+                            String error=task.getException().toString();
+                            Toast.makeText(HospitalRegistration2.this, "Error: "+error, Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                        }
+                    }
+                });
+
+        /*if (FilePathUri != null)
             {
 
                 uploadTask = storageReference.putFile(FilePathUri);
@@ -377,7 +426,7 @@ public class HospitalRegistration2 extends AppCompatActivity {
             firebaseUser.delete();
             Toast.makeText(HospitalRegistration2.this, "There is some issue uploading the Image, please try again", Toast.LENGTH_SHORT).show();
 
-        }
+        }*/
     }
 
 
