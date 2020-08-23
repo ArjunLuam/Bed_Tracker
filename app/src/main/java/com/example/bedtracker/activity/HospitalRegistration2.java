@@ -186,7 +186,7 @@ public class HospitalRegistration2 extends AppCompatActivity {
                                         Toast.makeText(HospitalRegistration2.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
                                             getLocation();
-                                            uploadImage();
+                                           // uploadImage();
 
                                     }
                                 }
@@ -298,6 +298,7 @@ public class HospitalRegistration2 extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
                 mCircleImageView.setImageBitmap(bitmap);
                 Glide.with(HospitalRegistration2.this).load(FilePathUri).into(mCircleImageView);
+                uploadImage();
 
             }
             catch (IOException e) {
