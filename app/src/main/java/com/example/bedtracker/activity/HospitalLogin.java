@@ -146,7 +146,7 @@ public class HospitalLogin extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 pd.dismiss();
-                Toast.makeText(HospitalLogin.this, "Error in connecting to database.Please restart and try again!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HospitalLogin.this,databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
