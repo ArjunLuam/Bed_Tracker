@@ -9,4 +9,14 @@
         android:icon="@drawable/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"/>
+
+    <item
+        android:id="@+id/aboutdevelopers"
+        android:title="About Developers"/>
+
+
+
 </menu>

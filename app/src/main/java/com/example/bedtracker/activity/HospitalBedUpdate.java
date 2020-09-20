@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.bedtracker.R;
@@ -36,6 +38,7 @@ public class HospitalBedUpdate extends AppCompatActivity {
     FirebaseUser mFirebaseUser;
     FirebaseAuth auth;
     String uid;
+    private ImageView options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class HospitalBedUpdate extends AppCompatActivity {
         mTotalBeds = findViewById(R.id.et_number);
         mAvailableBeds = findViewById(R.id.et_model);
         mUpdate = findViewById(R.id.btn_details_submit);
+        options = findViewById(R.id.options);
 
         txtTotalBeds = mTotalBeds.getText().toString();
         txtAvailableBeds = mAvailableBeds.getText().toString();
@@ -55,6 +59,11 @@ public class HospitalBedUpdate extends AppCompatActivity {
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         auth=FirebaseAuth.getInstance();
         uid=auth.getCurrentUser().getUid();
+
+        SharedPreferences sharedPref = getSharedPreferences("LASTSTATE", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("STATE","BEDUPDATE" );
+        editor.apply();
 
 
 
@@ -78,6 +87,12 @@ public class HospitalBedUpdate extends AppCompatActivity {
 
 
 
+            }
+        });
+        options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HospitalBedUpdate.this, OptionActivity.class));
             }
         });
 
@@ -122,6 +137,12 @@ public class HospitalBedUpdate extends AppCompatActivity {
 
 
     }
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        finish();
+//        moveTaskToBack(true);
+//    }
 
 
 

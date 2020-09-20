@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.example.bedtracker.R;
 import com.example.bedtracker.adapter.bedAdapter;
 import com.example.bedtracker.model.bedModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +43,10 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        SharedPreferences sharedPref = getSharedPreferences("LASTSTATE", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("STATE","HOME" );
+        editor.apply();
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -59,7 +66,7 @@ public class Home extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Loading Hospital Data...");
         progressDialog.show();
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -116,6 +123,25 @@ public class Home extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(Home.this,Welcome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                finish();
+                Toast.makeText(getApplicationContext(),"Logout Sucessfull",Toast.LENGTH_LONG).show();
+                return true;
+            case R.id.aboutdevelopers:
+                Toast.makeText(getApplicationContext(),"About developers : Update further",Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
