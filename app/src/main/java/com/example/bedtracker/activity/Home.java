@@ -77,13 +77,17 @@ public class Home extends AppCompatActivity {
                 {
 
 
+                    String updateddate= dataSnapshot1.child("Data-Time").getValue().toString();
+                    String district= dataSnapshot1.child("District").getValue().toString();
+                    String postalcode= dataSnapshot1.child("Postal Code").getValue().toString();
+                    String district_postal = district +","+ postalcode;
 
 
-                        String name=dataSnapshot1.child("Hospital Name").getValue().toString();
+                    String name=dataSnapshot1.child("Hospital Name").getValue().toString();
                         String avail=dataSnapshot1.child("Number of beds available").getValue().toString();
                         String total=dataSnapshot1.child("Total Number of beds").getValue().toString();
 
-                        bedModel details=new bedModel(name,avail,total);
+                        bedModel details=new bedModel(name,avail,total,district_postal,updateddate);
                         list.add(details);
 
 
